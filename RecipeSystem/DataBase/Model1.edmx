@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище RecipesModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dish">
+          <Key>
+            <PropertyRef Name="DishID" />
+          </Key>
+          <Property Name="DishID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TitleDish" Type="varchar" MaxLength="200" />
+          <Property Name="Weight" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="CaloriesDish" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="ProteinsDish" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="FatsDish" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="СarbohydratesDish" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Ingredient">
+          <Key>
+            <PropertyRef Name="IngredientID" />
+          </Key>
+          <Property Name="IngredientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TitleIng" Type="varchar" MaxLength="100" />
+          <Property Name="CaloriesIng" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="ProteinsIng" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="FatsIng" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="СarbohydratesIng" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="Tracking">
+          <Key>
+            <PropertyRef Name="TrackingID" />
+          </Key>
+          <Property Name="TrackingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DishId" Type="int" />
+          <Property Name="IngredientId" Type="int" />
+          <Property Name="Count" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <Association Name="FK__Tracking__DishId__3B75D760">
+          <End Role="Dish" Type="Self.Dish" Multiplicity="0..1" />
+          <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dish">
+              <PropertyRef Name="DishID" />
+            </Principal>
+            <Dependent Role="Tracking">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tracking__Ingred__3C69FB99">
+          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="0..1" />
+          <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredient">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="Tracking">
+              <PropertyRef Name="IngredientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище RecipesModelContainer">
+          <EntitySet Name="Dish" EntityType="Self.Dish" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ingredient" EntityType="Self.Ingredient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tracking" EntityType="Self.Tracking" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Tracking__DishId__3B75D760" Association="Self.FK__Tracking__DishId__3B75D760">
+            <End Role="Dish" EntitySet="Dish" />
+            <End Role="Tracking" EntitySet="Tracking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tracking__Ingred__3C69FB99" Association="Self.FK__Tracking__Ingred__3C69FB99">
+            <End Role="Ingredient" EntitySet="Ingredient" />
+            <End Role="Tracking" EntitySet="Tracking" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RecipesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Dish">
+          <Key>
+            <PropertyRef Name="DishID" />
+          </Key>
+          <Property Name="DishID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleDish" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="CaloriesDish" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="ProteinsDish" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="FatsDish" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="СarbohydratesDish" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Trackings" Relationship="Self.FK__Tracking__DishId__3B75D760" FromRole="Dish" ToRole="Tracking" />
+        </EntityType>
+        <EntityType Name="Ingredient">
+          <Key>
+            <PropertyRef Name="IngredientID" />
+          </Key>
+          <Property Name="IngredientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleIng" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CaloriesIng" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="ProteinsIng" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="FatsIng" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="СarbohydratesIng" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="Trackings" Relationship="Self.FK__Tracking__Ingred__3C69FB99" FromRole="Ingredient" ToRole="Tracking" />
+        </EntityType>
+        <EntityType Name="Tracking">
+          <Key>
+            <PropertyRef Name="TrackingID" />
+          </Key>
+          <Property Name="TrackingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DishId" Type="Int32" />
+          <Property Name="IngredientId" Type="Int32" />
+          <Property Name="Count" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="Dish" Relationship="Self.FK__Tracking__DishId__3B75D760" FromRole="Tracking" ToRole="Dish" />
+          <NavigationProperty Name="Ingredient" Relationship="Self.FK__Tracking__Ingred__3C69FB99" FromRole="Tracking" ToRole="Ingredient" />
+        </EntityType>
+        <Association Name="FK__Tracking__DishId__3B75D760">
+          <End Role="Dish" Type="Self.Dish" Multiplicity="0..1" />
+          <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dish">
+              <PropertyRef Name="DishID" />
+            </Principal>
+            <Dependent Role="Tracking">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tracking__Ingred__3C69FB99">
+          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="0..1" />
+          <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredient">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="Tracking">
+              <PropertyRef Name="IngredientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RecipesEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dishes" EntityType="Self.Dish" />
+          <EntitySet Name="Ingredients" EntityType="Self.Ingredient" />
+          <EntitySet Name="Trackings" EntityType="Self.Tracking" />
+          <AssociationSet Name="FK__Tracking__DishId__3B75D760" Association="Self.FK__Tracking__DishId__3B75D760">
+            <End Role="Dish" EntitySet="Dishes" />
+            <End Role="Tracking" EntitySet="Trackings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tracking__Ingred__3C69FB99" Association="Self.FK__Tracking__Ingred__3C69FB99">
+            <End Role="Ingredient" EntitySet="Ingredients" />
+            <End Role="Tracking" EntitySet="Trackings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище RecipesModelContainer" CdmEntityContainer="RecipesEntities1">
+          <EntitySetMapping Name="Dishes">
+            <EntityTypeMapping TypeName="RecipesModel.Dish">
+              <MappingFragment StoreEntitySet="Dish">
+                <ScalarProperty Name="DishID" ColumnName="DishID" />
+                <ScalarProperty Name="TitleDish" ColumnName="TitleDish" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="CaloriesDish" ColumnName="CaloriesDish" />
+                <ScalarProperty Name="ProteinsDish" ColumnName="ProteinsDish" />
+                <ScalarProperty Name="FatsDish" ColumnName="FatsDish" />
+                <ScalarProperty Name="СarbohydratesDish" ColumnName="СarbohydratesDish" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ingredients">
+            <EntityTypeMapping TypeName="RecipesModel.Ingredient">
+              <MappingFragment StoreEntitySet="Ingredient">
+                <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
+                <ScalarProperty Name="TitleIng" ColumnName="TitleIng" />
+                <ScalarProperty Name="CaloriesIng" ColumnName="CaloriesIng" />
+                <ScalarProperty Name="ProteinsIng" ColumnName="ProteinsIng" />
+                <ScalarProperty Name="FatsIng" ColumnName="FatsIng" />
+                <ScalarProperty Name="СarbohydratesIng" ColumnName="СarbohydratesIng" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trackings">
+            <EntityTypeMapping TypeName="RecipesModel.Tracking">
+              <MappingFragment StoreEntitySet="Tracking">
+                <ScalarProperty Name="TrackingID" ColumnName="TrackingID" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="IngredientId" ColumnName="IngredientId" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

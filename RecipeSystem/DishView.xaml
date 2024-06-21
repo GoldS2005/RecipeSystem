@@ -1,0 +1,93 @@
+﻿<Window x:Class="RecipeSystem.DishView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RecipeSystem"
+        mc:Ignorable="d"
+        Title="DishView" Height="450" Width="800">
+    <Grid>
+
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280*"/>
+            <ColumnDefinition Width="Auto" MinWidth="74"/>
+            <ColumnDefinition Width="280*"/>
+            <ColumnDefinition Width="Auto" MinWidth="120"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1">
+            <Label Height="132"></Label>
+            <Button Name ="ReadyButton" Click="ReadyButton_Click" Margin="10,0">←</Button>
+            <Label></Label>
+            <Button Name ="NoReadyButton" Click="NoReadyButton_Click" Margin="10,0">→</Button>
+        </StackPanel>
+
+        <ScrollViewer Grid.Column="2" Margin="14" VerticalScrollBarVisibility="Auto">
+            <ListView Name="FalseListView" ItemsSource="{Binding DishesFalse}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+
+                        <TextBlock>
+                            <Run Text="{Binding TitleDish}"></Run>
+                            <LineBreak></LineBreak>
+                            <Label>Вес:</Label>
+                            <Run Text="{Binding Weight}"></Run>
+                            <LineBreak></LineBreak>
+                            <Label>Калорийность:</Label>
+                            <Run Text="{Binding CaloriesDish}"></Run>
+                            <LineBreak></LineBreak>
+                            <Label>БЖУ:</Label>
+                            <Run Text="{Binding ProteinsDish}"></Run>
+                            <Run Text="{Binding FatsDish}"></Run>
+                            <Run Text="{Binding СarbohydratesDish}"></Run>
+
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+
+        <StackPanel Grid.Column="3">
+            
+            <Button Name ="IngredientButton" Click="IngredientButton_Click">Ингредиенты</Button>
+            <Label></Label>
+            <Button Name ="EditButton" Click="EditButton_Click">Редактировать</Button>
+            <Label></Label>
+            <Button Name ="DeleteButton" Click="DeleteButton_Click">Удалить</Button>
+            <Label></Label>
+            <Button Name ="AddButton" Click="AddButton_Click">Создать</Button>
+            <Label Height="40"></Label>
+            <Button Name ="ExitButton" Click="ExitButton_Click">Выйти</Button>
+        </StackPanel>
+
+
+
+        <ScrollViewer Grid.Column="0" Margin="14" VerticalScrollBarVisibility="Auto">
+            <ListView Name="TrueListView" ItemsSource="{Binding DishesTrue}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+
+                        <TextBlock>
+                            <Run Text="{Binding TitleDish}"></Run>
+                            <LineBreak></LineBreak>
+                            <Label>Вес:</Label>
+                            <Run Text="{Binding Weight}"></Run>
+                            <LineBreak></LineBreak>
+                            <Label>Калорийность:</Label>
+                            <Run Text="{Binding CaloriesDish}"></Run>
+                            <LineBreak></LineBreak>
+                            <Label>БЖУ:</Label>
+                            <Run Text="{Binding ProteinsDish}"></Run>
+                            <Run Text="{Binding FatsDish}"></Run>
+                            <Run Text="{Binding СarbohydratesDish}"></Run>
+
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+
+
+    </Grid>
+</Window>

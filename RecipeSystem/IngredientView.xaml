@@ -1,0 +1,71 @@
+﻿<Window x:Class="RecipeSystem.IngredientView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RecipeSystem"
+        mc:Ignorable="d"
+        Title="IngredientView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+             <ListView Name="IngredientListView" ItemsSource="{Binding Ingredients}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding TitleIng}"></Run>
+                            <LineBreak></LineBreak>
+                            <Label>Калорийность:</Label>
+                            <Run Text="{Binding CaloriesIng}"></Run>
+                            <LineBreak></LineBreak>
+                            <Label>БЖУ:</Label>
+                            <Run Text="{Binding ProteinsIng}"></Run>
+                            <Run Text="{Binding FatsIng}"></Run>
+                            <Run Text="{Binding СarbohydratesIng}"></Run>
+                            
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        
+        </ScrollViewer>
+           
+
+        <StackPanel Grid.Row="1" Name="IngredientBlock">
+            <Label>Ингредиент:</Label>
+            <TextBox Name ="titletextbox" Text="{Binding TitleIng}"></TextBox>
+            <Label>Калорийность:</Label>
+            <TextBox Name ="caloriestextbox" Text="{Binding CaloriesIng}"></TextBox>
+            <Label>БЖУ:</Label>
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <Label>Белки:</Label>
+                <TextBox Name ="proteinstextbox" Width="100" Text="{Binding ProteinsIng}"></TextBox>
+                <Label>Жиры:</Label>
+                <TextBox Name ="fatstextbox" Width="100" Text="{Binding FatsIng}"></TextBox>
+                <Label>Углеводы:</Label>
+                <TextBox Name ="carbohydratestextbox" Width="100" Text="{Binding СarbohydratesIng}"></TextBox>
+
+
+            </StackPanel>
+
+        </StackPanel>
+        
+
+        <StackPanel Grid.Row="3">
+            <Label></Label>
+            <Button Name="AddButton" Click="AddButton_Click">Добавить</Button>
+            <Label></Label>
+            <Button Name="DeleteButton" Click="DeleteButton_Click">Удалить</Button>
+            <Label></Label>
+            <Button Name="BackButton" Click="BackButton_Click">Назад</Button>
+            <Label></Label>
+        </StackPanel>
+    </Grid>
+</Window>

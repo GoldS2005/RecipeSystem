@@ -1,0 +1,31 @@
+Create table Dish
+(
+	DishID int primary key identity(1,1),
+	TitleDish varchar(200),
+	[Weight] Decimal(5,2),
+	CaloriesDish Decimal(5,2),
+	ProteinsDish Decimal(5,2),
+	FatsDish Decimal(5,2),
+	СarbohydratesDish Decimal(5,2),
+	[Status] bit
+)
+
+Create table Ingredient
+(
+	IngredientID int primary key identity(1,1),
+	TitleIng varchar(100),
+	CaloriesIng Decimal(5,2),
+	ProteinsIng Decimal(5,2),
+	FatsIng Decimal(5,2),
+	СarbohydratesIng Decimal(5,2),
+)
+
+Create table Tracking
+(
+	TrackingID int primary key identity(1,1),
+	DishId int,
+	IngredientId int,
+	[Count] Decimal(5,2),
+	FOREIGN KEY (DishId) REFERENCES Dish(DishID),
+    FOREIGN KEY (IngredientId) REFERENCES Ingredient(IngredientID)
+)

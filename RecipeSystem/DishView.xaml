@@ -18,9 +18,9 @@
 
         <StackPanel Grid.Column="1">
             <Label Height="132"></Label>
-            <Button Name ="ReadyButton" Click="ReadyButton_Click" Margin="10,0">←</Button>
+            <Button Name ="ReadyButton" Click="ReadyButton_Click" Margin="10,0" Height="30">←</Button>
             <Label></Label>
-            <Button Name ="NoReadyButton" Click="NoReadyButton_Click" Margin="10,0">→</Button>
+            <Button Name ="NoReadyButton" Click="NoReadyButton_Click" Margin="10,0" Height="30">→</Button>
         </StackPanel>
 
         <ScrollViewer Grid.Column="2" Margin="14" VerticalScrollBarVisibility="Auto">
@@ -30,9 +30,6 @@
 
                         <TextBlock>
                             <Run Text="{Binding TitleDish}"></Run>
-                            <LineBreak></LineBreak>
-                            <Label>Вес:</Label>
-                            <Run Text="{Binding Weight}"></Run>
                             <LineBreak></LineBreak>
                             <Label>Калорийность:</Label>
                             <Run Text="{Binding CaloriesDish}"></Run>
@@ -48,7 +45,7 @@
             </ListView>
         </ScrollViewer>
 
-        <StackPanel Grid.Column="3">
+        <StackPanel Grid.Column="3" Width="100">
             
             <Button Name ="IngredientButton" Click="IngredientButton_Click">Ингредиенты</Button>
             <Label></Label>
@@ -71,9 +68,7 @@
                         <TextBlock>
                             <Run Text="{Binding TitleDish}"></Run>
                             <LineBreak></LineBreak>
-                            <Label>Вес:</Label>
-                            <Run Text="{Binding Weight}"></Run>
-                            <LineBreak></LineBreak>
+                            
                             <Label>Калорийность:</Label>
                             <Run Text="{Binding CaloriesDish}"></Run>
                             <LineBreak></LineBreak>

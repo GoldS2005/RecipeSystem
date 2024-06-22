@@ -50,7 +50,21 @@ namespace RecipeSystem
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
+            if (FalseListView.SelectedItems.Count > 0)
+            {
+                var selectedDish = FalseListView.SelectedItems[0] as Dish;
 
+                if (selectedDish != null)
+                {
+
+
+                    DishEdit dishEdit = new DishEdit(entities, selectedDish);
+                    dishEdit.Show();
+                    Hide();
+
+
+                }
+            }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)

@@ -13,10 +13,17 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
 
+
+
         </Grid.RowDefinitions>
 
-        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
-             <ListView Name="IngredientListView" ItemsSource="{Binding Ingredients}" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+            <ListView Name="IngredientListView" ItemsSource="{Binding Ingredients}" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
@@ -29,16 +36,16 @@
                             <Run Text="{Binding ProteinsIng}"></Run>
                             <Run Text="{Binding FatsIng}"></Run>
                             <Run Text="{Binding СarbohydratesIng}"></Run>
-                            
+
                         </TextBlock>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        
-        </ScrollViewer>
-           
 
-        <StackPanel Grid.Row="1" Name="IngredientBlock">
+        </ScrollViewer>
+
+
+        <StackPanel Grid.Column="1" Name="IngredientBlock">
             <Label>Ингредиент:</Label>
             <TextBox Name ="titletextbox" Text="{Binding TitleIng}"></TextBox>
             <Label>Калорийность:</Label>
@@ -46,19 +53,19 @@
             <Label>БЖУ:</Label>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <Label>Белки:</Label>
-                <TextBox Name ="proteinstextbox" Width="100" Text="{Binding ProteinsIng}"></TextBox>
+                <TextBox Name ="proteinstextbox" Width="75" Text="{Binding ProteinsIng}"></TextBox>
                 <Label>Жиры:</Label>
-                <TextBox Name ="fatstextbox" Width="100" Text="{Binding FatsIng}"></TextBox>
+                <TextBox Name ="fatstextbox" Width="75" Text="{Binding FatsIng}"></TextBox>
                 <Label>Углеводы:</Label>
-                <TextBox Name ="carbohydratestextbox" Width="100" Text="{Binding СarbohydratesIng}"></TextBox>
+                <TextBox Name ="carbohydratestextbox" Width="75" Text="{Binding СarbohydratesIng}"></TextBox>
 
 
             </StackPanel>
 
         </StackPanel>
-        
 
-        <StackPanel Grid.Row="3">
+
+        <StackPanel Grid.Row="1" Width="200">
             <Label></Label>
             <Button Name="AddButton" Click="AddButton_Click">Добавить</Button>
             <Label></Label>

@@ -78,21 +78,31 @@ namespace RecipeSystem
                 Status = false
             };
 
+            Dishes.Add(newDish);
+            entities.Dishes.Add(newDish);
+            entities.SaveChanges();
+
 
             foreach (var ingredient in RecipeIngredients)
             {
+                Tracking tracking = new Tracking()
+                {
+                    DishId = newDish.DishID,
+                    IngredientId = ingredient.IngredientID,
+                    
+                };
 
+                entities.Trackings.Add(tracking);
             }
 
 
-            Dishes.Add(newDish);
-            entities.Dishes.Add(newDish);
+            
 
             entities.SaveChanges();
 
 
 
-            RecipeIngredients.Clear();
+            
 
 
             this.Close();

@@ -23,16 +23,20 @@ namespace RecipeSystem
     {
         RecipesEntities1 entities;
 
-        public Dish dish;
+       
 
         public ObservableCollection<DataBase.Ingredient> Ingredients { get; set; }
 
         public ObservableCollection<Ingredient> RecipeIngredients { get; set; }
 
-        public ObservableCollection<Dish> Dishes { get; set; }
+       
 
         public Ingredient SelectedIngredient { get; set; }
         public Ingredient SelectedRecipeIngredient { get; set; }
+
+        public Dish CurrentDish { get; set; }
+
+        public Tracking CurrentTracking { get; set; }
 
         public DishEdit(RecipesEntities1 entities, Dish SelectedDish)
         {
@@ -40,18 +44,21 @@ namespace RecipeSystem
 
             this.entities = entities;
 
-            this.dish = SelectedDish;
+            CurrentDish = SelectedDish;
 
+            var ingredientsInDish = entities.Trackings.Where(gsi => gsi.DishId == SelectedDish.DishID).Select(gsi => gsi.IngredientId).ToList();
 
-            Ingredients = new ObservableCollection<Ingredient>(entities.Ingredients.ToList());
+            Ingredients = new ObservableCollection<Ingredient>(entities.Ingredients.Where(ingredient => !ingredientsInDish.Contains(ingredient.IngredientID)).ToList());
 
-            RecipeIngredients = new ObservableCollection<Ingredient>(entities.Ingredients);
+            RecipeIngredients = new ObservableCollection<Ingredient>(entities.Trackings.Where(gsi => gsi.DishId == SelectedDish.DishID).Select(gsi => entities.Ingredients.FirstOrDefault(ingredient => ingredient.IngredientID == gsi.IngredientId)).ToList());
 
-            Dishes = new ObservableCollection<Dish>(entities.Dishes);
+           
 
 
 
             DataContext = this;
+
+            nameValue.Text = CurrentDish.TitleDish;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -64,22 +71,32 @@ namespace RecipeSystem
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
 
-            dish.TitleDish = nameValue.Text.Trim();
-            dish.CaloriesDish = RecipeIngredients.Sum(ing => ing.CaloriesIng);
-            dish.ProteinsDish = RecipeIngredients.Sum(ing => ing.ProteinsIng);
-            dish.FatsDish = RecipeIngredients.Sum(ing => ing.FatsIng);
-            dish.СarbohydratesDish = RecipeIngredients.Sum(ing => ing.СarbohydratesIng);
+            CurrentDish.TitleDish = nameValue.Text.Trim();
+            CurrentDish.CaloriesDish = RecipeIngredients.Sum(ing => ing.CaloriesIng);
+            CurrentDish.ProteinsDish = RecipeIngredients.Sum(ing => ing.ProteinsIng);
+            CurrentDish.FatsDish = RecipeIngredients.Sum(ing => ing.FatsIng);
+            CurrentDish.СarbohydratesDish = RecipeIngredients.Sum(ing => ing.СarbohydratesIng);
 
+            var ingredientsToDelete = entities.Trackings.Where(gsi => gsi.DishId == CurrentDish.DishID);
+            entities.Trackings.RemoveRange(ingredientsToDelete);
 
             foreach (var ingredient in RecipeIngredients)
             {
 
+                Tracking tracking = new Tracking()
+                {
+                    DishId = CurrentDish.DishID,
+                    IngredientId = ingredient.IngredientID,
+
+                };
+
+                entities.Trackings.Add(tracking);
             }
 
 
             entities.SaveChanges();
 
-            RecipeIngredients.Clear();
+            
 
 
             this.Close();

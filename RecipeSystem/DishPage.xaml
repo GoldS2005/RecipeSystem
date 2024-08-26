@@ -21,6 +21,13 @@
                         <TextBlock Padding="6 12 0 0">
                             <Run Text="{Binding TitleIng}"/>
                             <LineBreak/>
+                            <Label>Калорийность:</Label>
+                            <Run Text="{Binding CaloriesIng}"></Run>
+                            <LineBreak></LineBreak>
+                            <Label>БЖУ:</Label>
+                            <Run Text="{Binding ProteinsIng}"></Run>
+                            <Run Text="{Binding FatsIng}"></Run>
+                            <Run Text="{Binding СarbohydratesIng}"></Run>
                         </TextBlock>
                     </Border>
                 </DataTemplate>
@@ -48,6 +55,13 @@
                         <TextBlock Padding="6 12 0 0">
                             <Run Text="{Binding TitleIng}"/>
                             <LineBreak/>
+                            <Label>Калорийность:</Label>
+                            <Run Text="{Binding CaloriesIng}"></Run>
+                            <LineBreak></LineBreak>
+                            <Label>БЖУ:</Label>
+                            <Run Text="{Binding ProteinsIng}"></Run>
+                            <Run Text="{Binding FatsIng}"></Run>
+                            <Run Text="{Binding СarbohydratesIng}"></Run>
                         </TextBlock>
                     </Border>
                 </DataTemplate>
